@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { AngularFireAuth } from 'angularfire2/auth';
+import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
+import { List } from 'app/shared/domain/list';
 
 @Component({
     selector: 'app-sidebar',
@@ -10,7 +12,12 @@ import { AngularFireAuth } from 'angularfire2/auth';
 })
 export class SidebarComponent {
 
-    constructor(public router: Router, public afAuth: AngularFireAuth) {}
+    lists: FirebaseListObservable<List[]>;
+
+    constructor(public router: Router, public afAuth: AngularFireAuth, db: AngularFireDatabase) {
+        this.lists = db.list('/lists');
+    }
+
 
     isActive = false;
     showMenu = '';
@@ -29,4 +36,6 @@ export class SidebarComponent {
         this.afAuth.auth.signOut();
         this.router.navigateByUrl("login");
     }
+
+    
 }

@@ -1,0 +1,23 @@
+<h2>New list</h2>
+<hr>
+
+<div class="form-group">
+  <label >Name</label>
+  <input type="text" [(ngModel)]="newList.name" class="form-control" placeholder="Enter name">
+</div>
+
+<div class="form-group">
+  <label>Description</label>
+  <textarea class="form-control" [(ngModel)]="newList.description" placeholder="Enter description"></textarea>
+</div>
+
+<div class="form-group">
+  <label>Type</label>
+  <select class="form-control">
+    <option *ngFor="let type of types | async" >{{ type.name }}</option>
+  </select>
+</div>
+
+<button type="button" class="btn btn-primary" (click)="onCreateList()">Create</button>
+
+
