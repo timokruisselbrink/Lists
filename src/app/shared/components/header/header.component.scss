@@ -1,4 +1,5 @@
-$topnav-background-color: #222;
+@import "../../../../styles/variables";
+$topnav-background-color: $color-dark-primary;
 .topnav {
     border-radius: 0;
     background-color: $topnav-background-color;
@@ -9,12 +10,7 @@ $topnav-background-color: #222;
         padding-left : 0;
         cursor: pointer;
     }
-    .top-right-nav{
-        .buy-now{
-            a{
-                color:#999;
-            }
-        }
+    .top-right-nav{       
         .dropdown-menu{
             top: 40px;
             right: -5px;
@@ -44,29 +40,7 @@ $topnav-background-color: #222;
         }
     }
 }
-.messages {
-    width: 300px;
-    .media {
-        border-bottom: 1px solid #DDD;
-        padding: 5px 10px;
-        &:last-child {
-            border-bottom: none;
-        }
-    }
-    .media-body {
-        h5 {
-            font-size: 13px;
-            font-weight: 600;
-        }
-        .small {
-            margin: 0;
-        }
-        .last {
-            font-size: 12px;
-            margin: 0;
-        }
-    }
-}
+
 .header .navbar {
     background: $topnav-background-color !important;
 }
