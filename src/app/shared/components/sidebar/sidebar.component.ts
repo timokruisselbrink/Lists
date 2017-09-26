@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+
+import { AngularFireAuth } from 'angularfire2/auth';
 
 @Component({
     selector: 'app-sidebar',
@@ -6,6 +9,9 @@ import { Component } from '@angular/core';
     styleUrls: ['./sidebar.component.scss']
 })
 export class SidebarComponent {
+
+    constructor(public router: Router, public afAuth: AngularFireAuth) {}
+
     isActive = false;
     showMenu = '';
     eventCalled() {
@@ -17,5 +23,10 @@ export class SidebarComponent {
         } else {
             this.showMenu = element;
         }
+    }
+
+    onSignOut() {
+        this.afAuth.auth.signOut();
+        this.router.navigateByUrl("login");
     }
 }
