@@ -20,13 +20,23 @@ export class LoginComponent implements OnInit {
     email:string = 'timokruisselbrink@hotmail.com';
     password:string = 'test123';
 
+    containerClass:string = "";
+
     ngOnInit() {
+    }
+
+    onRegisterClick(){
+        this.containerClass = "active";
+    }
+
+    onCloseRegisterClick(){
+        this.containerClass = "";
     }
 
     onLoggedin() {
         this.afAuth.auth.signInWithEmailAndPassword(this.email, this.password).then(result => {
 
-              this.router.navigate(["/my-recipes"])
+              this.router.navigate(["/blank-page"]);
      
             
           }).catch(result => {
