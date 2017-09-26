@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
-import { TranslateService } from '@ngx-translate/core';
 
 import { AngularFireAuth } from 'angularfire2/auth';
 
@@ -14,7 +13,7 @@ export class HeaderComponent implements OnInit {
 
     pushRightClass: string = 'push-right';
     
-    constructor(private translate: TranslateService, public router: Router, public afAuth: AngularFireAuth) {
+    constructor(public router: Router, public afAuth: AngularFireAuth) {
         this.router.events.subscribe((val) => {
             if (val instanceof NavigationEnd && window.innerWidth <= 992 && this.isToggled()) {
                 this.toggleSidebar();
@@ -42,9 +41,5 @@ export class HeaderComponent implements OnInit {
     onLoggedout() {
         this.afAuth.auth.signOut();
         this.router.navigateByUrl("login");
-    }
-
-    changeLang(language: string) {
-        this.translate.use(language);
     }
 }
