@@ -1,0 +1,10 @@
+<h2>Home</h2>
+<hr>
+
+<div *ngFor="let list of lists | async">
+  <h3 class="card-header">{{list.name}}</h3>
+  <div class="card-block">
+    <p class="card-text">{{list.description}}</p>
+    <a href="#" class="btn btn-primary">Go somewhere</a>
+  </div>
+</div>

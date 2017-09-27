@@ -13,8 +13,8 @@
 
 <div class="form-group">
   <label>Type</label>
-  <select class="form-control">
-    <option *ngFor="let type of types | async" >{{ type.name }}</option>
+  <select class="form-control" [(ngModel)]="newList.type">
+    <option *ngFor="let type of types | async" [ngValue]="type.name">{{ type.name }}</option>
   </select>
 </div>
 

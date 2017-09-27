@@ -6,8 +6,9 @@ const routes: Routes = [
     {
         path: '', component: LayoutComponent,
         children: [
-            { path: 'blank-page', loadChildren: './blank-page/blank-page.module#BlankPageModule' },
-            { path: 'new-list', loadChildren: './new-list/new-list.module#NewListModule' }
+            { path: 'new-list', loadChildren: './new-list/new-list.module#NewListModule' },
+            { path: 'home', loadChildren: './home/home.module#HomeModule' },
+            { path: 'list/:type/:id', loadChildren: './list/list.module#ListModule' }
         ]
     }
 ];
