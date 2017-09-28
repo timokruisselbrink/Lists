@@ -32,7 +32,7 @@
 
         
 
-        <a *ngFor="let list of lists | async" [routerLink]="['/list', list.type, list.$key]" [routerLinkActive]="['router-link-active']" class="list-group-item">
+        <a *ngFor="let list of lists | async" [routerLink]="['/list', list.$key, list.type]" [routerLinkActive]="['router-link-active']" class="list-group-item">
             <i class="fa fa-file-o"></i>&nbsp;{{ list.name }}
         </a>    
         

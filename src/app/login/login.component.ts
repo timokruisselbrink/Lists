@@ -36,7 +36,7 @@ export class LoginComponent implements OnInit {
     onLoggedin() {
         this.afAuth.auth.signInWithEmailAndPassword(this.email, this.password).then(result => {
 
-              this.router.navigate(["/blank-page"]);
+              this.router.navigate(["/home"]);
      
             
           }).catch(result => {

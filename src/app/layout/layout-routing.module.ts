@@ -8,7 +8,7 @@ const routes: Routes = [
         children: [
             { path: 'new-list', loadChildren: './new-list/new-list.module#NewListModule' },
             { path: 'home', loadChildren: './home/home.module#HomeModule' },
-            { path: 'list/:type/:id', loadChildren: './list/list.module#ListModule' }
+            { path: 'list/:key', loadChildren: './list/list.module#ListModule' }
         ]
     }
 ];

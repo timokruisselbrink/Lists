@@ -17,7 +17,7 @@ export class NewListComponent implements OnInit {
 
   newList: List = new List();
 
-  constructor(public db: AngularFireDatabase, public router: Router) { }
+  constructor(private db: AngularFireDatabase, private router: Router) { }
 
   ngOnInit() {
     this.types = this.db.list('/types');
@@ -25,7 +25,6 @@ export class NewListComponent implements OnInit {
   }
 
   onCreateList(){
-    alert(this.newList.type);
     this.lists.push(this.newList).then((list) => {      
       switch (this.newList.type)
       {
@@ -34,16 +33,16 @@ export class NewListComponent implements OnInit {
           break;      
       }
   
-      this.router.navigate(['/list', this.newList.type, list.key]);
+      this.router.navigate(['/list', list.key, this.newList.type]);
     });    
   }
 
   createChecklist(key){
     const newChecklist = new Checklist();
-    newChecklist.id = key;
+    newChecklist.uid = "Japapjejdsjf";
 
     const checklists = this.db.list('/checklists');
-    checklists.push(newChecklist)
+    checklists.update(key, newChecklist);
   }
 
 }

@@ -1,3 +1,3 @@
 export class ListTypeBase {
-    id:string;
+    uid:string;
 }
