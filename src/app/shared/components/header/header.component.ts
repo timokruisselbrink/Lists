@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 
 import { AngularFireAuth } from 'angularfire2/auth';
+import { UserService } from 'app/shared/services/user/user.service';
 
 
 @Component({
@@ -12,8 +13,10 @@ import { AngularFireAuth } from 'angularfire2/auth';
 export class HeaderComponent implements OnInit {
 
     pushRightClass: string = 'push-right';
+
+    userDisplayName:string = "";
     
-    constructor(public router: Router, public afAuth: AngularFireAuth) {
+    constructor(private router: Router, private afAuth: AngularFireAuth, private userService: UserService) {
         this.router.events.subscribe((val) => {
             if (val instanceof NavigationEnd && window.innerWidth <= 992 && this.isToggled()) {
                 this.toggleSidebar();
@@ -21,7 +24,9 @@ export class HeaderComponent implements OnInit {
         });
     }
 
-    ngOnInit() {}
+    ngOnInit() {
+        this.userDisplayName = this.userService.getDisplayName();        
+    }
 
     isToggled(): boolean {
         const dom: Element = document.querySelector('body');
@@ -31,11 +36,6 @@ export class HeaderComponent implements OnInit {
     toggleSidebar() {
         const dom: any = document.querySelector('body');
         dom.classList.toggle(this.pushRightClass);
-    }
-
-    rltAndLtr() {
-        const dom: any = document.querySelector('body');
-        dom.classList.toggle('rtl');
     }
 
     onLoggedout() {

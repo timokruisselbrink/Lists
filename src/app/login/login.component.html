@@ -26,27 +26,38 @@
 
         </div>
         <div class="card alt">
-          <div class="toggle" (click)="onRegisterClick()"></div>
-          <h1 class="title">Register
+          <div class="toggle" [class.togglewarning]="registerHasError" (click)="onRegisterClick()" ></div>
+          <h1 class="title">Register            
             <div class="close" (click)="onCloseRegisterClick()"></div>
+            <h5 class="warning" *ngFor="let error of errorMessageRegister">{{error}}</h5>
           </h1>
             <div class="input-container">
-              <input type="#{type}" id="#{label}" required="required"/>
-              <label for="#{label}">Username</label>
+              <input type="text" [(ngModel)]="emailRegister" required="required"/>
+              <label>Username</label>
               <div class="bar"></div>
             </div>
             <div class="input-container">
-              <input type="password" id="#{label}" required="required"/>
-              <label for="#{label}">Password</label>
+              <input [(ngModel)]="passwordRegister" type="password" required="required"/>
+              <label>Password</label>
               <div class="bar"></div>
             </div>
             <div class="input-container">
-              <input type="password" id="#{label}" required="required"/>
-              <label for="#{label}">Repeat Password</label>
+              <input [(ngModel)]="repeatPasswordRegister" type="password" required="required"/>
+              <label>Repeat Password</label>
+              <div class="bar"></div>
+            </div>
+            <div class="input-container">
+              <input type="text" [(ngModel)]="firstNameRegister" required="required"/>
+              <label>First name</label>
+              <div class="bar"></div>
+            </div>
+            <div class="input-container">
+              <input type="text" [(ngModel)]="lastNameRegister" required="required"/>
+              <label>Last name</label>
               <div class="bar"></div>
             </div>
             <div class="button-container">
-              <button><span>Next</span></button>
+              <button (click)="register()"><span>Next</span></button>
             </div>
         </div>
       </div>

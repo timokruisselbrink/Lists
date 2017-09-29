@@ -17,10 +17,18 @@ export class LoginComponent implements OnInit {
 
     constructor(public router: Router, public afAuth: AngularFireAuth) { }
     
+    containerClass:string;
+    errorMessageRegister:string[] = new Array();
+    registerHasError:boolean;
+
     email:string = 'timokruisselbrink@hotmail.com';
     password:string = 'test123';
 
-    containerClass:string = "";
+    emailRegister:string;
+    passwordRegister:string;
+    repeatPasswordRegister:string;
+    firstNameRegister:string;
+    lastNameRegister:string;
 
     ngOnInit() {
     }
@@ -35,13 +43,45 @@ export class LoginComponent implements OnInit {
 
     onLoggedin() {
         this.afAuth.auth.signInWithEmailAndPassword(this.email, this.password).then(result => {
+            this.router.navigate(["/home"]); 
+        }).catch(result => {
+            //todo
+        });
+    }
 
-              this.router.navigate(["/home"]);
-     
-            
-          }).catch(result => {
-                //todo
-          });
+    register(){
+        this.registerInputIsValid();
+        this.afAuth.auth.createUserWithEmailAndPassword(this.emailRegister, this.passwordRegister).then((response) => {
+            // Signup success
+            const user = this.afAuth.auth.currentUser;
+
+            user.updateProfile({
+                displayName: (this.firstNameRegister + " " + this.lastNameRegister),
+                photoURL: ""
+            }).then(() => {
+                this.router.navigate(["/home"]);                
+            }).catch(() => {
+
+            });            
+        }).catch((response) => {
+            // Signup failed
+            this.errorMessageRegister.push(response.message);
+        });
+    }
+    
+    registerInputIsValid() :boolean {
+        this.errorMessageRegister = new Array();
+        this.registerHasError = false;
+
+        if(this.passwordRegister != this.repeatPasswordRegister){
+            this.errorMessageRegister.push("Passwords do not match.");
+        }
+
+        if(this.errorMessageRegister.length > 0){
+            this.registerHasError = true
+            return false;
+        }
+        return true;
     }
 
 }
