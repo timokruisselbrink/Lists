@@ -6,6 +6,7 @@ import { LayoutRoutingModule } from './layout-routing.module';
 import { LayoutComponent } from './layout.component';
 import { HeaderComponent, SidebarComponent } from '../shared';
 import { UserService } from '../shared/services/user/user.service';
+import { ListService } from 'app/shared/services/list/list.service';
 
 @NgModule({
     imports: [
@@ -19,7 +20,8 @@ import { UserService } from '../shared/services/user/user.service';
         SidebarComponent
     ],
     providers: [
-        UserService
+        UserService,
+        ListService
     ]
 })
 export class LayoutModule { }

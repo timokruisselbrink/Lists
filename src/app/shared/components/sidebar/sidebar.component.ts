@@ -1,22 +1,29 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { AngularFireAuth } from 'angularfire2/auth';
-import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/database';
+import { FirebaseListObservable } from 'angularfire2/database';
 import { List } from 'app/shared/domain/list';
+import { ListService } from 'app/shared/services/list/list.service';
 
 @Component({
     selector: 'app-sidebar',
     templateUrl: './sidebar.component.html',
     styleUrls: ['./sidebar.component.scss']
 })
-export class SidebarComponent {
-
+export class SidebarComponent implements OnInit{    
     lists: FirebaseListObservable<List[]>;
+    sharedLists: FirebaseListObservable<List[]>;
 
-    constructor(public router: Router, public afAuth: AngularFireAuth, db: AngularFireDatabase) {
-        this.lists = db.list('/lists');
+    constructor(public router: Router, public afAuth: AngularFireAuth, private listService: ListService) {
+        
     }
+
+    ngOnInit(): void {
+        this.lists = this.listService.getListsForUser();
+        this.sharedLists = this.listService.getSharedListsForUser();
+    }
+
 
 
     isActive = false;

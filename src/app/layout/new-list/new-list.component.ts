@@ -3,6 +3,8 @@ import { AngularFireDatabase, FirebaseListObservable } from 'angularfire2/databa
 import { List } from 'app/shared/domain/list';
 import { Router } from '@angular/router';
 import { Checklist } from 'app/shared/domain/list-types/checklist';
+import { AngularFireAuth } from 'angularfire2/auth';
+import { UserService } from 'app/shared/services/user/user.service';
 
 
 @Component({
@@ -17,7 +19,7 @@ export class NewListComponent implements OnInit {
 
   newList: List = new List();
 
-  constructor(private db: AngularFireDatabase, private router: Router) { }
+  constructor(private db: AngularFireDatabase, private router: Router, private userService:UserService) { }
 
   ngOnInit() {
     this.types = this.db.list('/types');
@@ -25,6 +27,7 @@ export class NewListComponent implements OnInit {
   }
 
   onCreateList(){
+    this.newList.uid = this.userService.getUID();
     this.lists.push(this.newList).then((list) => {      
       switch (this.newList.type)
       {
@@ -39,7 +42,7 @@ export class NewListComponent implements OnInit {
 
   createChecklist(key){
     const newChecklist = new Checklist();
-    newChecklist.uid = "Japapjejdsjf";
+    newChecklist.uid = this.userService.getUID();
 
     const checklists = this.db.list('/checklists');
     checklists.update(key, newChecklist);

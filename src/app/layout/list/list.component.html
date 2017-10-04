@@ -1,7 +1,69 @@
-<h2>
-  {{ (list | async)?.name}}
-</h2>
-<hr>
+<div class="list-container">
+  <div>
+    <div class="list-title-container">
+      <h2 class="title">
+        {{ (list | async)?.name}}
+      </h2>
 
-<router-outlet></router-outlet>
+      <div class="dropdown menu">
+        <button type="button" class="btn btn-primary" ><i class="fa fa-ellipsis-v" aria-hidden="true"></i></button>
+        <div class="dropdown-content">
+          <a (click)="openShareModal(share)"><i class="fa fa-users" aria-hidden="true"></i> Share</a>
+          <a (click)="openDeleteModal(deletewarning)"><i class="fa fa-trash" aria-hidden="true"></i> Delete</a>
+        </div>
+      </div>    
+    </div>
+    <hr>
+  </div>
+
+  <div>
+    <router-outlet></router-outlet>
+  </div>
+</div>
+
+
+<ng-template #deletewarning let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <h4 class="modal-title">Are you sure?</h4>
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <p>Click delete to delete this list.</p>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-primary" (click)="c(false)">Cancel</button>
+        <button type="button" class="btn" (click)="c(true)">Delete</button>
+    </div>
+</ng-template>
+
+<ng-template #share let-c="close" let-d="dismiss">
+    <div class="modal-header">
+        <h4 class="modal-title">Share</h4>
+        <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <p></p>
+        <div class="form-group">
+          <input class="form-control add-input-text" type="email" [(ngModel)]="addShareEmail" placeholder="Email">  
+          <button type="button" class="btn btn-primary" (click)="addShare()">Add</button> 
+        </div>        
+
+        <div class="list-group share-list">
+            <div *ngFor="let share of shares | async" class="list-group-item">
+              <div class="text">{{share.email}}</div>
+              <div class="remove" (click)="deleteShare(share)"><i class="fa fa-trash" aria-hidden="true"></i></div>
+            </div>
+        </div>
+
+        
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn" (click)="c()">Close</button>
+    </div>
+</ng-template>
+
 

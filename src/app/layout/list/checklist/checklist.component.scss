@@ -14,3 +14,19 @@
 .remove{
     float: right;
 }
+
+
+.add-container {
+    display: flex;
+    margin-bottom: 5px;
+
+    .add-input-text {
+        flex-grow: 1; 
+    }
+        
+    .add-button {
+        width: 70px;
+        margin-left: 5px;  
+    }
+
+}
